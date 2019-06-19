@@ -1,4 +1,4 @@
-import { isFunction, isNullOrUndefined } from "common/js/utils";
+import { isFunction, isNullOrUndefined } from "./node_modules/common/js/utils";
 
 /* 
     解决多个异步问题,  在imgUpload有调用

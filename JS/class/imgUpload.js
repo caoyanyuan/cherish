@@ -1,7 +1,7 @@
-import httpRequest from '@/utils/httpRequest'  //封装的请求含糊
-import { proxyUrl } from '@/api/fetch'    //拼出接口路径 在正式和本地环境才开代理要加/proxyApi   在测试环境不用开代理
-import { getPicture } from '@/api/api'   //拼出绝对路径
-import AsyncTaskArray from 'common/js/AsyncTaskArray'  
+import httpRequest from './node_modules/@/utils/httpRequest'  //封装的请求含糊
+import { proxyUrl } from './node_modules/@/api/fetch'    //拼出接口路径 在正式和本地环境才开代理要加/proxyApi   在测试环境不用开代理
+import { getPicture } from './node_modules/@/api/api'   //拼出绝对路径
+import AsyncTaskArray from './node_modules/common/js/AsyncTaskArray'  
 
 const _resolve = Symbol( 'resolve' )
 const _reject = Symbol( 'reject' )
