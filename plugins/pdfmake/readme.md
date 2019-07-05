@@ -41,4 +41,7 @@ git clone https://github.com/bpampuch/pdfmake
 > ps vfs_fonts.js在vue中使用需要把 this.pdfmake 改成 pdfmake
 
 自定义字体 参考 github文档： https://pdfmake.github.io/docs/fonts/custom-fonts-client-side/
+
 demo链接： https://blog.csdn.net/idea_however/article/details/53402496
+
+另外： jspdf 可以将当前DOM元素截图生成pdf
