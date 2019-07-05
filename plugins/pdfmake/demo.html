@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+<script src="http://cdn.bootcss.com/pdfmake/0.1.20/pdfmake.js"/></script>
+<!-- <script src="http://cdn.bootcss.com/pdfmake/0.1.20/pdfmake.min.js"/></script>-->
+<script src="http://cdn.bootcss.com/pdfmake/0.1.20/vfs_fonts.js"/></script> 
+<script>
+    // pdfMake.fonts = {
+    //         Roboto : {
+    //             normal : 'Roboto-Regular.ttf',
+    //             bold : 'Roboto-Medium.ttf',
+    //             italics : 'Roboto-Italic.ttf',
+    //             bolditalics : 'Roboto-Italic.ttf'
+    //         },
+    //         微软雅黑 : {
+    //             normal : 'msyh.ttf',
+    //             bold : 'msyh.ttf',
+    //             italics : 'msyh.ttf',
+    //             bolditalics : 'msyh.ttf',
+    //         }
+    //     };
+var dd = {
+    content: [
+        'Hello word',
+        {
+        text: 'Hello word',
+        style: 'one',
+        },
+        {
+        text: 'Hello \nword'
+        },{
+        //分隔符
+        columns: [
+                {
+                    width: 90,
+                    text: '你好世界'
+                },
+                {
+                    width: '*',
+                    text: '你好世界'
+                },
+                {
+                    columns:[
+                        {text:'Hello word'},
+                        {text:'你好世界',fontSize: 20}
+                    ]
+                },
+            ]
+        },
+        //表格
+        {
+            table: {
+                body: [
+                    ['word','word','word','word'],
+                    [{text:'word',colSpan:2},'','',{text:'word',rowSpan:3}],
+                    [{text:'word',colSpan:2,rowSpan:2},'','word',''],
+                    ['','','word',''],
+                ]
+            }
+        },
+        {
+            ol:[
+                'Hello word',
+                '你好世界',
+                {
+                    ul: [
+                        'Hello word',
+                        '你好世界'
+                    ]
+                },
+                'Hello word'
+            ],
+        },{
+        //margin:[left,up,right,down]
+            text:'Hello word 你好世界',
+            margin:[100,100,100,100],
+        }
+    ],
+    styles: {
+        one: {
+            fontSize: 24,
+            alignment: 'center'
+        }
+    },
+    // defaultStyle : {
+    //     font : '方正姚体'
+    // }
+};
+console.log(pdfMake)
+//pdf打印
+pdfMake.createPdf(dd).print();
+//pdf下载
+pdfMake.createPdf(dd).download();
+</script>
+</body>
+</html>
