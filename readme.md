@@ -1,5 +1,3 @@
-# superMap  自定义类 使用在vue
-
 #### 文件目录
 - HIT
     - Treap
