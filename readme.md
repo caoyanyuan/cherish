@@ -24,11 +24,13 @@
     - webpack  
     - image 
 - vue
+    - 源码  b站源码解读记录
     - components
         - baseTable
         - myForm
         - search
         - imageDialog 左缩略图右放大图
+    - $on $root 及其应用。。。
 - webpack
     - init
 
