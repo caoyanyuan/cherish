@@ -1,4 +1,4 @@
-////隐藏所有 tool-item下拉框组件
+//隐藏所有 tool-item下拉框组件
 //child.$options.name 获取组件名称
 function handleParentClick() {
 
