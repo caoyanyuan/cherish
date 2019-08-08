@@ -38,5 +38,29 @@ before:
     npm run build:innet 内网服务器
 
 0805-0811
-  1. 渔船新增编辑
-  2. 重点关注渔船
+1. 对于值是否传递的判断  不要用
+```
+  if(value)
+```
+排除不掉 传来 false 和 0 的时候
+```
+  if(!isNullOrUndefined(oValue))
+```
+
+2. 全局 局部刷新 巧用
+```
+<wrapper class="wrapper">
+    <!-- 三级级页面 -->
+    <keep-alive v-if="toggleRouterVisible">
+        <router-view></router-view>
+    </keep-alive>
+</wrapper>
+
+refreshRouter() {
+  this.toggleRouterVisible = false
+  setTimeout(() => {
+      this.toggleRouterVisible = true
+  })
+},
+
+```
