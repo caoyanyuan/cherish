@@ -30,3 +30,6 @@ export function permutationAndCombination(arr, n){
 
     return ret;
 }
+
+
+// 来源： 看不懂的位运算：https://segmentfault.com/q/1010000012532332
