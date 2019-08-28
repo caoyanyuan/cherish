@@ -9,7 +9,7 @@
     我在A页面改了userInfo  不经过刷新。b对他的调用并不知道最新的改动
 
 实际运用：
-    在 渔港项目中 权限管理，每个页面显示当前港口，切换至别的港口，开放首页权限；但是关闭其他所有界面。这就是一个组件操控另外一个好远的组件，这里必须使用==vuex==， 但是刷新当前界面，要保留当前港口信息。这一块要用storage，故需要storage和vuex结合使用；
+    在 渔港项目中 权限管理，每个页面显示当前港口，切换至别的港口，开放首页权限；并且关闭其他所有界面。这就是一个组件操控另外一个好远的组件，这里必须使用==vuex==， 但是刷新当前界面，要保留当前港口信息。这一块要用storage，故需要storage和vuex结合使用；
 
 
 - location.vue
@@ -32,11 +32,11 @@ storage:
     username: "admin"
     mobile: "11111111111"
     orgId: "0"
-    orgName: "深圳海域"
-    password: "aac0b32b4448fc6c2d330725b1081c712318a5c9f4934bafba3a08abb101fb0e"
+    orgName: "深圳"
+    password: "xxx"
     realName: "超级管理员"
     roleIdList: null
-    salt: "FZNXygdMZV0x5OQG27eF"
+    salt: "xxx"
     status: 1
 
     // 系统里面根据需要‘计算’出的信息

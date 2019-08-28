@@ -9,7 +9,7 @@
 ```
 ps: set NODE_ZNV='innet' 这个参数可以通过process.env.NODE_ZNV拿到
 
-2. 配置 build.js 写个提示
+2. 配置 build.js 写个log
 ```
 let znv_node = process.env.NODE_ZNV
 const isInnet = /innet/.test( znv_node )
@@ -23,11 +23,10 @@ if ( /test/.test( znv_node ) ) {
 }
 
 ```
-3. webpack.prod.conf 配置 env 对象
+3. 在webpack.prod.conf.js中 配置 env 对象 来放置一些关于打包环境不同的配置参数
+>注意： NODE_ZNV  区分内网还是外网  NODE_ENV 区分生产还是开发
 ```
-let env = process.env.NODE_ENV === 'testing'
-  ? require('../config/test.env')
-  : require('../config/prod.env')
+let env = {}
 
 let znv_node = process.env.NODE_ZNV
 
@@ -47,7 +46,7 @@ innet.env：
     module.exports = {
       NODE_ENV: '"production"',
       NODE_ZNV: '"innet"',
-      IP: "'http://192.168.59.182:8090'",
+      IP: "'内网IP'",
     }
 
 

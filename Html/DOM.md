@@ -9,7 +9,7 @@ classList: 类名列表
 childNodes： 子节点
 firstChild
 innerHTML
-offsetLeft，offsetTop
+offsetLeft, offsetTop
 style： {
     width/height/top/left...
 }

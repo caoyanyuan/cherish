@@ -6,7 +6,7 @@
 RPC failed; curl 56 OpenSSL SSL_read: SSL_ERROR_SYSCALL, errno 10054
 ```
 - 原因： 刚新换电脑，电脑已经存在他人的ssh，但是git配置的账号密码已经改成自己的吗，这样ssh和用户不一致
-- 解决办法:配置自己的ssh替换原来用户的
+- 解决办法: 配置自己的ssh替换原来用户的
 - 步骤：
 1. 检查是否已经有SSH Key：
 
