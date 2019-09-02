@@ -27,7 +27,7 @@ import "base/baseTable"
 | name            | 表头配置对应datas的key   |  String    |      |
 | type            | 行数据类型               |  String    |  注解见下 | slot/image/detail/icon/time
 | imageWidth      | 设置的图片宽             |   Number   | type为'image' | 默认为100
-| imageHeight     | 设置的图片高             |   Number   | type为'image' | 默认为60123
+| imageHeight     | 设置的图片高             |   Number   | type为'image' | 默认为60
 | isNeedDefault   | 是否需要默认图片         |   Boolean  | type为'image'  |
 | isHidden        | 是否隐藏该值             |   Boolean |  配全所有的data值，以备其他需求(详情配置)  | 默认false
 | iconWidth       | 设置的图标宽             |   Number  |  type为'icon' | 默认为60
@@ -43,9 +43,5 @@ import "base/baseTable"
 
 
 ### 方法
-checkDetail： type为detail时，查看详情 传值row 当前行的数据
-handleRowClick： 行点击触发  row, event, column (elementUI提供参数)
-
--
-```
-```
+1. checkDetail： type为detail时，查看详情 传值row 当前行的数据
+2. handleRowClick： 行点击触发  row, event, column (elementUI提供参数)
