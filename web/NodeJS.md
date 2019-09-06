@@ -79,3 +79,20 @@ ev.emit('msg', 1,2,3)
 
 
 post 最大可以1g  post接收数据一堆包
+
+#### 八 NodeJS文件解析、流操作、gz压缩
+
+表单的三种post
+- text/plain    用得很少，纯文字
+- multipart/form-data   专门用来上传文件内容
+- application   默认  url编码方式
+
+
+
+
+
+
+
+fs.readFile先把所有的数据存入内存，然后回调
+1. 极其占用内存
+2. 资源利用不充分
