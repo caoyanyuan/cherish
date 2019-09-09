@@ -119,6 +119,7 @@ Buffer.prototype.split = Buffer.prototype.split || function(b) {
 last-modified: Mon, 12 Sep 2016 13:47:32 GMT
 
 ```
+注意 cache-control
 
 #### 2. 多进程： 安全、性能高
 特点：
@@ -155,6 +156,9 @@ node，nginx等都是 是多进程服务器
         大   text 1g
 
 主键： 性能高，唯一 
+
+
+#### 十 nodeJS 使用MYSQL,socket io入门
 
 
 
