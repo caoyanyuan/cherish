@@ -111,8 +111,69 @@ Buffer.prototype.split = Buffer.prototype.split || function(b) {
 ```
 
 
+### 九、Nodejs缓存、多进程、MySql基础
+
+#### 1. nodejs缓存： 304
+
+```
+last-modified: Mon, 12 Sep 2016 13:47:32 GMT
+
+```
+
+#### 2. 多进程： 安全、性能高
+特点：
+- 普通程序不能创建进程，只有系统进程才能创建进程,只有主程才能分裂
+- 进程是分裂出来的，有父子级关系
+- 分裂出来的两个进程执行的是同一套代码
+- 父子进程之间可以共享“句柄”  一个端口只有一个句柄 handler
+
+```
+const cluster = require('cluster')
+cluster.fork()
+cluster.isMaster 是否在主进程
+```
+
+主进程--守护工程 不怎么工作的
+子进程--工作进程
+
+子进程A满了 -> 子进程B
+
+node，nginx等都是 是多进程服务器
+
+#### 3.数据库基础
+
+1.服务端： wamp里面的mysql，单装的MySQL的server
+2.客户端： nodeJs，java，php，Navicat for mysql
+
+认识数据库
+1. 库-文件夹：不能存数据，只能管理表
+2. 表-文件：存数据
 
 
-fs.readFile先把所有的数据存入内存，然后回调
-1. 极其占用内存
-2. 资源利用不充分
+小数： float单精度浮点数 小数点后8位   double双精度浮点数 小数点后 10-308
+字符串： 小   varchar 255
+        大   text 1g
+
+主键： 性能高，唯一 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
