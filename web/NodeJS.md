@@ -88,7 +88,27 @@ post 最大可以1g  post接收数据一堆包
 - application   默认  url编码方式
 
 
+##### Buffer操作
+1. 对buffer数据进行的操作:
+- 查找  indexOf()
+- 截取  slice(start, end)  不包含end
+- 
 
+
+```
+Buffer.prototype.split = Buffer.prototype.split || function(b) {
+    let arr = [],
+        cur = 0,
+        n = 0;
+    while((n=this.indexOf(b, cur))!=-1){
+        arr.push(this.slice(cur, n))
+        cur = b + b.length
+    }
+    
+    arr.push(this.slice(cur));
+    return arr
+}
+```
 
 
 
