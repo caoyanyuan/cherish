@@ -98,3 +98,5 @@ let key2 = hash.digest('base64');
 sock.write(`HTTP/1.1 101 Switiching Protocols\r\nUpgrade: websocket\r\nConnection:Upgrade\r\nSec-WebSocket-Accept:${key2}\r\n\r\n`)
 
 ```
+
+> 未完待续 
