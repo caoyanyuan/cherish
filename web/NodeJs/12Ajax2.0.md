@@ -51,3 +51,4 @@ server.post('/api', (req, res) => {
 server.use(express.static('../www'))  //解析静态文件
 
 ```
+ 
