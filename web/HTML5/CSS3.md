@@ -31,3 +31,7 @@ x-axis y-axis就是坐标的表示，可能的值为：
 X:left center right length %
 Y:top center bottom length %
 默认 为50% 50%
+
+#### 3. preserve-3d 
+作用于子元素  子元素可以脱离腹肌。
+每一个需要子级脱离出来的地方都要加上
