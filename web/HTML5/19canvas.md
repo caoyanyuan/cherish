@@ -23,17 +23,17 @@ drawImage(
  ```
     let imageData = gd.getImageData(0, 0, w, h)
         let data = imageData.data
-        
+
         for(let r=0;r<h;r++) {
             for(let c=0;c<w;c++){
                 //data[(r*w+c)*4+0] => r
-                //data[(r*w+c)*4+1] => g 
-                //data[(r*w+c)*4+2] => b 
+                //data[(r*w+c)*4+1] => g
+                //data[(r*w+c)*4+2] => b
                 //data[(r*w+c)*4+3] => a
-                
-                data[(r*w+c)*4+0] = data[(r*w+c)*4+1] = data[(r*w+c)*4+2] = 
+
+                data[(r*w+c)*4+0] = data[(r*w+c)*4+1] = data[(r*w+c)*4+2] =
                 (data[(r*w+c)*4+0]+data[(r*w+c)*4+1]+data[(r*w+c)*4+2])/3 * 0.5
-                
+
             }
         }
 
@@ -52,3 +52,6 @@ r行c列   r*w+c
 
 和video的交互：可以逐帧播放视频
 3. 图形后续处理
+
+
+图片上传下载等
