@@ -11,8 +11,8 @@ destory () {
             this.ctl.viewer.entities.remove( entity )
         } )
     }
-    this[ entites ].splice(0,0)
-    this[ states ].splice(0,0)
+    this[ entites ].splice(0, this.this[ entites ])
+    this[ states ].splice(0, this[ states ].length)
 }
 
 ```
