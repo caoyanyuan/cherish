@@ -21,6 +21,7 @@ function getCenterPosition(ctl = CesiumCtl) {
 
 }
 
+// 获取屏幕点的任意坐标x,y即可转成对应的经纬度
 function getPosition(x, y, viewer) {
     var result = viewer.camera.pickEllipsoid(new Cesium.Cartesian2(x,y));
     var curPosition = Cesium.Ellipsoid.WGS84.cartesianToCartographic(result);
