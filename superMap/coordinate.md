@@ -35,7 +35,7 @@ function getPosition(x, y, viewer) {
 
 ```
 
-方式二:  camera.computeViewRectangle直接可以拿到视野的东西南北的四个方向值，在三维的时候，获取的点和方式一一样可以达到效果
+方式二:  camera.computeViewRectangle直接可以拿到视野的东西南北的四个方向值，在三维的时候，获取的点和方式一效果一致，
 但是在二维中计算会返回undefined
 
 ```
