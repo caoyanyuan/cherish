@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>datasource</title>
+    <link href="./Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    <link href="./css/pretty.css" rel="stylesheet">
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/slider.js"></script>
+    <script type="text/javascript" src="./js/require.min.js" data-main="js/main"></script>
+
+</head>
+<body>
+<div id="cesiumContainer"></div>
+<canvas id="canvas"></canvas>
+<div id='loadingbar' class="spinner">
+    <div class="spinner-container container1">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+    </div>
+    <div class="spinner-container container2">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+    </div>
+    <div class="spinner-container container3">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    function onload(Cesium) {
+        //天地图影像底图
+        var tiandituImg = 'http://120.78.73.154:8090/iserver/services/map-tianditu/rest/maps/%E5%BD%B1%E5%83%8F%E5%BA%95%E5%9B%BE_%E7%BB%8F%E7%BA%AC%E5%BA%A6';
+        var viewer = new Cesium.Viewer('cesiumContainer', {
+            imageryProvider : new Cesium.SuperMapImageryProvider({
+                url:tiandituImg
+            })
+        });
+        var imageryLayers = viewer.imageryLayers;
+        var widget = viewer.cesiumWidget;
+
+        //几何图形被高程遮挡问题
+        viewer.scene.globe.depthTestAgainstTerrain = false; 
+
+        $('#loadingbar').remove();
+
+        //设置视角
+        viewer.scene.camera.setView({
+            destination: new Cesium.Cartesian3.fromDegrees(
+                113.920481171443, 22.4849661241019,3000),
+            orientation: {
+                heading : 0.0,
+                pitch : -Cesium.Math.PI_OVER_TWO,
+                roll : 0.0
+            }
+        });
+
+        //构造json
+        var data = [
+            { lon: 113.919203, lat: 22.485154 },
+            { lon: 113.920174, lat: 22.484905 },
+            { lon: 113.921343, lat: 22.484816 },
+            { lon: 113.919965, lat: 22.483875 },
+            { lon: 113.922137, lat: 22.484816 },
+
+            { lon: 113.920978, lat: 22.481892 },
+            { lon: 113.919042, lat: 22.482130 },
+            { lon: 113.924111, lat: 22.485282 },
+            { lon: 113.918527, lat: 22.486869 },
+            { lon: 113.923618, lat: 22.480762 },
+
+            { lon: 113.917776, lat: 22.484430 },
+            { lon: 113.922051, lat: 22.484469 },
+            { lon: 113.918141, lat: 22.484767 },
+            { lon: 113.924562, lat: 22.485104 },
+            { lon: 113.924626, lat: 22.483974 },
+
+            { lon: 113.920807, lat: 22.480246 },
+        ];
+        
+        
+        // 构造一个dataSource
+        var dataSource = new Cesium.CustomDataSource();
+        for (var i = 0; i < data.length; i++) {
+            var entity = new Cesium.Entity({
+                position: Cesium.Cartesian3.fromDegrees(data[i].lon, data[i].lat),
+                    billboard: {
+                        image: 'images/ship.png',
+                        width:30,
+                        height:30
+                }
+            });
+            //将实体添加到集合DataSource中
+            dataSource.entities.add(entity); 
+        }
+        //将DataSource添加到场景中
+        var dataSourcePromise = viewer.dataSources.add(dataSource);     
+
+        Cesium.when.all([
+                //图标图片
+                Cesium.Resource.fetchImage('images/level1.png'),
+                Cesium.Resource.fetchImage('images/level2.png'),
+                Cesium.Resource.fetchImage('images/level3.png'),
+            ],
+            function(images) {
+                //根据图片和文字绘制canvas
+                function drawCanvas(level,text){
+                    var canvas = document.createElement("canvas");      //创建canvas标签
+                    var ctx = canvas.getContext("2d");
+                    var w = 50;
+                    canvas.width = w;     
+                    canvas.height = w;
+                    ctx.font="14px Arial";
+                    ctx.fillStyle="rgb(255,255,255)";
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+                    ctx.drawImage(images[level], 0, 0, w, w);
+                    ctx.fillText(text, w/2, w/2);
+
+                    var result = canvas.toDataURL("image/png");
+                    return result;
+                }
+                //设置2000米以下不聚合
+                viewer.scene.camera.moveEnd.addEventListener(function()
+                {
+                    var height=Math.ceil(viewer.camera.positionCartographic.height);
+                    if(height>=2000){
+                        cluster();
+                    }
+                    else
+                        dataSource.clustering.enabled = false;
+                });
+                //聚合
+                function cluster(){
+                    dataSourcePromise.then(function(dataSource) {
+                        var pixelRange = 25; // 定义群集的屏幕像素尺寸(默认为80，自定义)
+                        var minimumClusterSize = 1;
+                        var enabled = true;
+                        
+                        dataSource.clustering.enabled = enabled; // 开启聚集统计
+                        dataSource.clustering.pixelRange = pixelRange;  // 屏幕空间数
+                        dataSource.clustering.minimumClusterSize = minimumClusterSize; // 最少聚集数目
+
+                        var removeListener;
+
+                        //聚合图标样式
+                        function customStyle() {
+                            if (Cesium.defined(removeListener)) {
+                                removeListener();
+                                removeListener = undefined;
+                            } else {
+                                removeListener = dataSource.clustering.clusterEvent.addEventListener(function(clusteredEntities, cluster) {
+                                    //聚合数量
+                                    //聚合数量小于5的用图标1,5-10用图标2，其余用图标3
+                                    var count = clusteredEntities.length;
+                                    if (clusteredEntities.length < 5) {
+                                        cluster.billboard.image = drawCanvas(0,count);
+                                    } else if (clusteredEntities.length < 10) {
+                                        cluster.billboard.image = drawCanvas(1,count);
+                                    } else{
+                                        cluster.billboard.image = drawCanvas(2,count);
+                                    }
+                                    // 不显示默认的label群集样式
+                                    cluster.label.show = false;
+                                    // 使用PinBuilder来做群集的显示效果
+                                    cluster.billboard.show = true;
+                                });
+                            };
+                            // force a re-cluster with the new styling
+                            var pixelRange = dataSource.clustering.pixelRange;
+                            dataSource.clustering.pixelRange = 0;
+                            dataSource.clustering.pixelRange = pixelRange;
+                        }
+                        // start with custom style
+                        customStyle();
+                    })
+                }   
+        });
+    }
+</script>
+</body>
+</html>
