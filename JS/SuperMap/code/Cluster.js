@@ -13,11 +13,8 @@ const COLOR_MAP = {
 }
 // 高度：距离半径
 const HEIGHT_MAP = [
-    { height:  1800,  r:   50,  ratio: 0.9 },
-    { height:  1000,  r:   30,  ratio: 0.8 },
-    { height:  800,   r:   20,  ratio: 0.75 },
-    { height:  500,   r:   0,   ratio: 0.75},
-    { height:  0,   r:   0  , ratio: 0.75},
+    { height:  500,   r:   0,  },
+    { height:  0,   r:   0  ,},
 ]
 
 // 聚合点图片
@@ -30,7 +27,12 @@ const ICONES_MAP = [
 
 // 聚合点对象
 export default class Cluster extends PointAbs{
+    static promise = new Promise( ( resolve, reject ) => Cluster.resolve = resolve )
+    static heightes = HEIGHT_MAP
     static entites = null
+    static baseHeight = { height: 5000, r: 200 }
+    //threshold
+    static showShipBillboardHeight = 5000
 
     /**
      *
@@ -46,11 +48,10 @@ export default class Cluster extends PointAbs{
         this.createEntity()
 
     }
-   
     createEntity() {
+
         this.position.height = this.height
 
-        //拿到拼接的图片
         this.getIconDataUrl().then(({imageItem, iconDataUrl}) => {
             let json = {
                 position: this.position,
@@ -107,8 +108,7 @@ export default class Cluster extends PointAbs{
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
        
-            W = W*this.ratio
-            ctx.font=`bold ${this.ratio*20}px Arial`;
+            ctx.font=`bold 14px Arial`;
 
             ctx.drawImage(image.loadedDom, 0, 0, W, W);
             ctx.fillText(this.number, W/2, W/2);
@@ -121,5 +121,10 @@ export default class Cluster extends PointAbs{
     static destory() {
         this.entites.destory()
     }
+
+    get ratio() {
+        return HEIGHT_MAP.find(item => item.r <= this.radius).ratio || 1
+    }
+
 
 }
