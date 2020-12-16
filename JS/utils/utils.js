@@ -18,9 +18,9 @@
         return null
     }
 }
-// 判断时间是上午还是下午
-export function formatDate(date) {
-    let str = this.getDateStr(date)
+// 格式化时间为上午 2:00 或者下午2:00
+export function getMoringStr(date) {
+    let str = getDateStr(date)
 
     if(str) {
         let sendTime = new Date(date),
@@ -30,7 +30,7 @@ export function formatDate(date) {
         var timeValue = "" +((hours >= 12) ? "下午" : "上午" )
 
         timeValue += ((hours >12) ? hours -12 :hours)
-        timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+        timeValue += ":" + minutes
 
         return str+" "+timeValue
      }else{
