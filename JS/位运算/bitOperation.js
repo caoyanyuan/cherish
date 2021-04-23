@@ -6,19 +6,20 @@ function permutationAndCombination(arr, n){
 
     for (let m=n || 0; m <= _len; m++) {
 
-        for (let i=0;i< Math.pow(2,_len);i++){
+        for (let i=0;i< Math.pow(2, _len) ;i++){
             let a = 0,
                 sum = 0,
                 sumIndex = []
-
+            
             for (let j=0;j<_len;j++){
-                if(i>>j & 1){
+                console.log(m, i, j, '----', i>>j)
+                if(i>>j){
                     a++;
-                    sumIndex.push(j);
+                    sumIndex.push(arr[j]);
                     sum += arr[j]
                 }
             }
-
+            
             if(a==m){
                 ret.push({
                     sum,
@@ -27,11 +28,12 @@ function permutationAndCombination(arr, n){
             }
         }
     }
-
+    console.log(ret)
     return ret;
 }
 
 
 // 来源： 看不懂的位运算：https://segmentfault.com/q/1010000012532332
 
-console.log(15|13)
+
+permutationAndCombination([1,2])
